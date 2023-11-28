@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
+using Core.Extensions;
 
 namespace Business.BusinessAspects.Autofac
 {
