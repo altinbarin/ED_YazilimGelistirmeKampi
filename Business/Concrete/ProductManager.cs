@@ -38,14 +38,11 @@ namespace Business.Concrete
 
 
         //Claim
-        [SecuredOperation("product.add,admin")]
+        //[SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
-            //Bir kategoride en fazla 10 ürün olabilir
-            //Aynı isimde ürün eklenemez
-            //Eğer mevcut kategori sayısı 15'i geçtiyse sisteme yeni ürün eklenemez
             IResult result = BusinessRules.Run(CheckIfProductNameExist(product.ProductName),
                 CheckIfProductCountOfCategoryCorrect(product.CategoryId),
                 CheckIfCategoryLimitExceded()
@@ -64,10 +61,10 @@ namespace Business.Concrete
         public IDataResult<List<Product>> GetAll()
         {
             //İş Kodları
-            if (DateTime.Now.Hour == 22)
-            {
-                return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour == 22)
+            //{
+            //    return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
+            //}
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
 
         }
